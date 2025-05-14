@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">NeoTube</string>
+    <string name="trending_load_error">Trending Load Error</string>
+</resources>

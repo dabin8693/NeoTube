@@ -5,17 +5,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.neotube.model.VideoItem
 import com.example.neotube.model.successOr
-import com.example.neotube.usecase.getVideoListUseCase
+import com.example.neotube.usecase.GetVideoListUseCase
 import com.example.neotube.R
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import com.example.neotube.model.Result
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
+import javax.inject.Inject
 
 // Trending탭 프레그먼트 ViewModel
-class TrendingViewModel(val getVideoListUseCase: getVideoListUseCase) : ViewModel() {
+@HiltViewModel
+class TrendingViewModel @Inject constructor(val getVideoListUseCase: GetVideoListUseCase) : ViewModel() {
     /*
      * TrendList를 받으면 Success전달 콜백에서 Item 터치 활성화
      * 썸네일 로딩여부는 Glide가 책임짐

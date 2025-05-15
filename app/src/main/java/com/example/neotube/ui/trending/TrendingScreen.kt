@@ -2,6 +2,7 @@ package com.example.neotube.ui.trending
 
 
 import android.R
+import android.net.Uri
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -23,6 +24,9 @@ import com.example.neotube.model.VideoItem
 import com.example.neotube.ui.component.VideoThumbnailCard
 import com.example.neotube.ui.trending.TrendingViewModel.TrendingIntent
 import com.example.neotube.ui.trending.TrendingViewModel.TrendingUiState
+import com.example.neotube.videoplayer.ExoPlayerControllerTest
+import com.example.neotube.videoplayer.ExoRootScreen
+import androidx.core.net.toUri
 
 @Composable
 fun TrendingScreen(viewmodel: TrendingViewModel){
@@ -39,7 +43,7 @@ fun TrendingScreen(viewmodel: TrendingViewModel){
             }
         }
         is TrendingUiState.Success -> {
-            TrendingList(videos = (uiState as TrendingUiState.Success).videos, onVideoItemClick = onVideoItemClick)
+            TrendingList(videos = (uiState as TrendingUiState.Success).videos, onVideoItemClick = onVideoItemClick, viewmodel)
         }
         is TrendingUiState.Error -> {
             // 에러 메시지나 재시도 버튼
@@ -61,17 +65,20 @@ fun TrendingScreen(viewmodel: TrendingViewModel){
 @Composable
 private fun TrendingList(
     videos: List<VideoItem>,
-    onVideoItemClick: (VideoItem) -> Unit
+    onVideoItemClick: (VideoItem) -> Unit,
+    viewmodel: TrendingViewModel
 ) {
     LazyColumn {
+        // video.id 를 key 로 삼아, 한 번만 get() 호출
         items(items = videos, key = { it.id }) { video ->
-            VideoThumbnailCard(
-                thumbnailRes = R.drawable.sym_contact_card,
-                title        = video.title,
-                channel      = video.channelName,
-                views        = video.views,
-                onClick      = { onVideoItemClick(video) }
-            )
+//            VideoThumbnailCard(
+//                thumbnailRes = R.drawable.sym_contact_card,
+//                title        = video.title,
+//                channel      = video.channelName,
+//                views        = video.views,
+//                onClick      = { onVideoItemClick(video) }
+//            )
+            ExoRootScreen(viewmodel.getExoPlayerCreate(), "testUri".toUri())
         }
     }
 }

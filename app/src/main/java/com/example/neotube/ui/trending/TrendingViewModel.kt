@@ -12,13 +12,15 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import com.example.neotube.model.Result
+import com.example.neotube.videoplayer.ExoPlayerControllerTest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
+import javax.inject.Provider
 
 // Trending탭 프레그먼트 ViewModel
 @HiltViewModel
-class TrendingViewModel @Inject constructor(val getVideoListUseCase: GetVideoListUseCase) : ViewModel() {
+class TrendingViewModel @Inject constructor(private val exoplayer: Provider<ExoPlayerControllerTest>, private val getVideoListUseCase: GetVideoListUseCase) : ViewModel() {
     /*
      * TrendList를 받으면 Success전달 콜백에서 Item 터치 활성화
      * 썸네일 로딩여부는 Glide가 책임짐
@@ -46,6 +48,12 @@ class TrendingViewModel @Inject constructor(val getVideoListUseCase: GetVideoLis
     // UI 필요한 데이터 가져옴
     init {
         getVideoList()
+    }
+
+    fun getExoPlayerCreate(): ExoPlayerControllerTest {
+        val exo = exoplayer.get()
+
+        return exo
     }
 
     fun getVideoList(){

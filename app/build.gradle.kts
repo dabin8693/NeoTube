@@ -77,14 +77,14 @@ dependencies {
     implementation(libs.okhttp)
 
     // Media player
-    implementation(libs.exoplayer.core)
-    implementation(libs.exoplayer.dash)
-    implementation(libs.exoplayer.database)
-    implementation(libs.exoplayer.datasource)
-    implementation(libs.exoplayer.hls)
-    implementation(libs.exoplayer.smoothstreaming)
-    implementation(libs.exoplayer.ui)
-    implementation(libs.extension.mediasession)
+    implementation(libs.media3.common)
+    implementation(libs.media3.common.ktx)
+    implementation(libs.media3.exoplayer)
+    implementation(libs.media3.ui)
+    implementation(libs.media3.datasource.okhttp)
+    implementation(libs.media3.datasource.hls)
+    implementation(libs.media3.datasource.dash)
+    implementation(libs.media3.exoplayer.smoothstreaming)
     /** NewPipe libraries **/
     // implementation(libs.teamnewpipe.nanojson)
     implementation(libs.teamnewpipe.newpipe.extractor)

@@ -12,14 +12,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.media3.exoplayer.ExoPlayer
 import com.example.neotube.ui.theme.NeoTubeTheme
 import com.example.neotube.ui.trending.TrendingScreen
 import com.example.neotube.ui.trending.TrendingViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val vm: TrendingViewModel by viewModels()
+    @Inject lateinit var exoPlayer: ExoPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
